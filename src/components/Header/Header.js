@@ -1,11 +1,12 @@
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Logo from '../../img/Logo/logo.png'
+import Logo from '../../img/Logo/logo.png';
+import '../Header/Header.css';
 
 const Header = () => {
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar className='bg-color' collapseOnSelect expand="lg" variant="dark">
             <Container>
                 <Navbar.Brand className='d-flex' as={Link} to='/'>
                     <img className='me-2 rounded-circle' src={Logo} alt="" width={30} height={30}/>
@@ -18,7 +19,8 @@ const Header = () => {
                         <Nav.Link as={Link} to='/about'>About</Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link as={Link} to='/blogs'>Blogs</Nav.Link>
+                        <Nav.Link as={Link} to='/register'>Register</Nav.Link>
+                        <Nav.Link as={Link} to='/login'>Login</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
