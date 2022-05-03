@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 import '../FirstSection/FirstSection.css'
 import FirstSectionSingleDevice from './FirstSectionSingleDevice/FirstSectionSingleDevice';
 
