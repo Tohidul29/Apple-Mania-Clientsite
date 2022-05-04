@@ -47,7 +47,6 @@ const Register = () => {
         const fullName = fullNameRef.current.value;
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        console.log(fullName, email, password);
 
         createUserWithEmailAndPassword(email, password);
     }
