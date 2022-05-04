@@ -1,15 +1,22 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
 import Logo from '../../img/Logo/logo.png';
 import '../Header/Header.css';
 
 const Header = () => {
+    const [user] = useAuthState(auth);
+    const handleLogout = () => {
+        signOut(auth);
+    }
     return (
         <Navbar className='bg-color' collapseOnSelect expand="lg" variant="dark">
             <Container>
                 <Navbar.Brand className='d-flex' as={Link} to='/'>
-                    <img className='me-2 rounded-circle' src={Logo} alt="" width={30} height={30}/>
+                    <img className='me-2 rounded-circle' src={Logo} alt="" width={30} height={30} />
                     Apple-Mania
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -21,7 +28,14 @@ const Header = () => {
                     </Nav>
                     <Nav>
                         <Nav.Link as={Link} to='/register'>Register</Nav.Link>
-                        <Nav.Link as={Link} to='/login'>Login</Nav.Link>
+                        <Nav>
+                            {
+                                user ?
+                                    <Button className='btn btn-warning' onClick={handleLogout}>Logout</Button>
+                                    :
+                                    <Nav.Link as={Link} to='/login'>Login</Nav.Link>
+                            }
+                        </Nav>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -65,7 +65,7 @@ const Login = () => {
             toast('Reset password Email sent');
         }
         else {
-            toast('Please give your Email address');
+            toast('Please Enter your Email on the input field');
         }
     }
 
