@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRegistered } from '@fortawesome/free-solid-svg-icons'
+import { faRegistered } from '@fortawesome/free-solid-svg-icons';
 import auth from '../../firebase.init';
 import '../Register/Register.css';
 import Loading from '../Loading/Loading';

@@ -1,10 +1,12 @@
 import { signOut } from 'firebase/auth';
 import React from 'react';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { Badge, Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Logo from '../../img/Logo/logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import '../Header/Header.css';
 
 const Header = () => {
@@ -25,15 +27,25 @@ const Header = () => {
                         <Nav.Link as={Link} to='/home'>Home</Nav.Link>
                         <Nav.Link as={Link} to='/inventory'>Inventory</Nav.Link>
                         <Nav.Link as={Link} to='/about'>About</Nav.Link>
+                        <Nav.Link as={Link} to='/blogs'>Blogs</Nav.Link>
                     </Nav>
                     <Nav>
                         <Nav.Link as={Link} to='/register'>Register</Nav.Link>
                         <Nav>
                             {
                                 user ?
+
                                     <Button className='btn btn-warning' onClick={handleLogout}>Logout</Button>
                                     :
                                     <Nav.Link as={Link} to='/login'>Login</Nav.Link>
+                            }
+                        </Nav>
+                        <Nav>
+                            {
+                                user ?
+                                <Badge bg="info" className='text-center my-auto ms-3'><FontAwesomeIcon icon={faUser}></FontAwesomeIcon> {user.displayName}</Badge>
+                                :
+                                <Badge bg="info" className='text-center my-auto ms-3'>No user logged in</Badge>
                             }
                         </Nav>
                     </Nav>
