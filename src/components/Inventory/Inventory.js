@@ -2,19 +2,26 @@ import React, { useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import useProducts from '../../hooks/useProducts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Inventory = () => {
     const [products, setProducts] = useProducts();
-    console.log(products);
-        //product delete:
-        const handleProductDelete = id =>{
-            const confirm = window.confirm('Are you sure to Delete this product?');
-            if (!confirm){
-                const url = `http://localhost:5000/product/${id}`;
-                console.log(url)
-            }
+    //product delete:
+    const handleProductDelete = id => {
+        const confirm = window.confirm('Are you sure to Delete this product?');
+        if (confirm) {
+            const url = `http://localhost:5000/product/${id}`;
+            fetch(url, {
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                const restProducts = products.filter(product => product._id !== id);
+                setProducts(restProducts);
+            })
         }
+    }
     return (
         <div className='w-75 mx-auto mt-4'>
             <Table striped bordered hover variant="dark">
@@ -40,7 +47,7 @@ const Inventory = () => {
                             <td>${product.price}</td>
                             <td>{product.quantity} pieces</td>
                             <td><Button><FontAwesomeIcon icon={faEdit}></FontAwesomeIcon></Button></td>
-                            <td><Button onClick={handleProductDelete} className='btn-danger'><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></Button></td>
+                            <td><Button onClick={() => handleProductDelete(product._id)} className='btn-danger'><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></Button></td>
                         </tr>)
                     }
                 </tbody>
