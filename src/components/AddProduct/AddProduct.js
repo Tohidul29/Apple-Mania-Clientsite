@@ -35,7 +35,7 @@ const AddProduct = () => {
                 <input className='mb-3' placeholder='Product Price' {...register("price", {required: true})} />
                 <input className='mb-3' placeholder='Product Quantity' {...register("quantity", {required: true})} />
                 <input className='mb-3' value={user.displayName} {...register("supplier", {required: true})} />
-                <input className='mb-3' value={user.email} readOnly {...register("mail", {required: true})} />
+                <input className='mb-3' value={user.email} readOnly {...register("email", {required: true})} />
 
                 {errors.exampleRequired && <span>This field is required</span>}
 

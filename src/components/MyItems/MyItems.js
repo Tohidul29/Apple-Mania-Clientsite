@@ -1,10 +1,14 @@
 import React from 'react';
+import useProducts from '../../hooks/useProducts';
+import UserItem from './UserItem/UserItem';
 
 const MyItems = () => {
-    const []
+    const [products, setProducts] = useProducts();
     return (
         <div>
-            <h1>This is my item page</h1>
+            {
+                products.map(product => <UserItem key={product._id} product = {product}></UserItem>)
+            }
         </div>
     );
 };
