@@ -25,10 +25,17 @@ const Header = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to='/home'>Home</Nav.Link>
-                        <Nav.Link as={Link} to='/inventory'>Inventory</Nav.Link>
-                        <Nav.Link as={Link} to='/about'>About</Nav.Link>
+                        <Nav.Link as={Link} to='/manageinventory'>Inventory</Nav.Link>
                         <Nav.Link as={Link} to='/blogs'>Blogs</Nav.Link>
                         <Nav.Link as={Link} to='/addProduct'>Add Product</Nav.Link>
+                        <Nav>
+                            {
+                                user?
+                                <Nav.Link as={Link} to='/myitems'>My Items</Nav.Link>
+                                :
+                                <Nav className='d-none'></Nav>
+                            }
+                        </Nav>
                     </Nav>
                     <Nav>
                         <Nav.Link as={Link} to='/register'>Register</Nav.Link>
@@ -44,7 +51,7 @@ const Header = () => {
                         <Nav>
                             {
                                 user ?
-                                <Badge bg="info" className='text-center my-auto ms-3'><FontAwesomeIcon icon={faUser}></FontAwesomeIcon> {user.displayName}</Badge>
+                                <Badge bg="info" className='text-center my-auto ms-3 mt-3' title={user.email}><FontAwesomeIcon icon={faUser}></FontAwesomeIcon> {user.displayName}</Badge>
                                 :
                                 <Badge bg="info" className='text-center my-auto ms-3'>No user logged in</Badge>
                             }

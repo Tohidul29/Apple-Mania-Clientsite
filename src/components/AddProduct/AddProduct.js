@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGift } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const AddProduct = () => {
+    const [user] = useAuthState(auth);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         const url = `http://localhost:5000/product`;
@@ -18,7 +21,6 @@ const AddProduct = () => {
         })
         .then(res => res.json())
         .then(output =>{
-            console.log(output);
             toast('Added one product successfully...');
         })
     };
@@ -32,7 +34,8 @@ const AddProduct = () => {
                 <textarea className='mb-3' placeholder='Product Description' {...register("description", {required: true})} />
                 <input className='mb-3' placeholder='Product Price' {...register("price", {required: true})} />
                 <input className='mb-3' placeholder='Product Quantity' {...register("quantity", {required: true})} />
-                <input className='mb-3' placeholder='Supplier Name' {...register("supplier", {required: true})} />
+                <input className='mb-3' value={user.displayName} {...register("supplier", {required: true})} />
+                <input className='mb-3' value={user.email} readOnly {...register("mail", {required: true})} />
 
                 {errors.exampleRequired && <span>This field is required</span>}
 
