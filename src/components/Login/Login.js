@@ -7,7 +7,7 @@ import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-
 import Loading from '../Loading/Loading';
 import '../Login/Login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLock } from '@fortawesome/free-solid-svg-icons'
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
