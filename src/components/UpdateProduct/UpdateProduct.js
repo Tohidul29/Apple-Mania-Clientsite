@@ -32,8 +32,33 @@ const UpdateProduct = () => {
             .then(res => res.json())
             .then(data => {
                 event.target.reset();
-                toast('Product quantity added successfully');
+                toast('Product quantity added successfully...');
             })
+    }
+
+    const handleDelivered = (event) => {
+        event.preventDefault();
+        if (quantity > 0) {
+            let updateItemQuantity = parseFloat(quantity) - 1;
+            let newItem = { name, img, price, quantity: updateItemQuantity, supplier, description };
+            setProduct(newItem);
+
+            fetch(`http://localhost:5000/product/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify(newItem),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(res => res.json())
+                .then(data => {
+                    event.target.reset();
+                    toast('One Product Delivered Successfully...');
+                })
+        }
+        else {
+            toast('Sorry This product is not available now');
+        }
     }
     return (
         <div className='mt-4'>
@@ -50,7 +75,9 @@ const UpdateProduct = () => {
                     <Form onSubmit={addQuantity} className='d-flex mt-3 justify-content-around'>
                         <input type="text" placeholder='Add Quantity' name='productQuantity' /> <Button type='submit'>Add</Button>
                     </Form>
-                    <Button type='submit' className='d-block mx-auto mt-3' variant="warning">Delivered</Button>
+                    <Form onSubmit={handleDelivered}>
+                        <Button type='submit' className='d-block mx-auto mt-3' variant="warning">Delivered</Button>
+                    </Form>
                 </Card.Body>
             </Card>
             <ToastContainer></ToastContainer>
