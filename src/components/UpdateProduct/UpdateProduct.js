@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Form } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 const UpdateProduct = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
+
+    const { name, img, price, quantity, supplier, description } = product;
 
     useEffect(() => {
         const url = `http://localhost:5000/product/${id}`;
@@ -12,6 +15,26 @@ const UpdateProduct = () => {
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [])
+
+    const addQuantity = (event) => {
+        event.preventDefault();
+        let updateItemQuantity = parseFloat(quantity) + parseFloat(event.target.productQuantity.value);
+        let newItem = { name, img, price, quantity: updateItemQuantity, supplier, description };
+        setProduct(newItem);
+
+        fetch(`http://localhost:5000/product/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(newItem),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                event.target.reset();
+                toast('Product quantity added successfully');
+            })
+    }
     return (
         <div className='mt-4'>
             <Card className='mx-auto shadow-lg bg-black text-light' style={{ width: '25rem' }}>
@@ -24,12 +47,13 @@ const UpdateProduct = () => {
                     </Card.Text>
                     <Card.Title className='text-center'>Quantity: {product.quantity}</Card.Title>
                     <Card.Title className='text-center'>Supplier: {product.supplier}</Card.Title>
-                    <div className='d-flex mt-3 justify-content-around'>
-                        <input type="text" placeholder='Add Quantity'/> <Button>Add</Button>
-                    </div>
-                    <Button className='d-block mx-auto mt-3' variant="warning">Delivered</Button>
+                    <Form onSubmit={addQuantity} className='d-flex mt-3 justify-content-around'>
+                        <input type="text" placeholder='Add Quantity' name='productQuantity' /> <Button type='submit'>Add</Button>
+                    </Form>
+                    <Button type='submit' className='d-block mx-auto mt-3' variant="warning">Delivered</Button>
                 </Card.Body>
             </Card>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };
