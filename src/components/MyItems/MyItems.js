@@ -4,6 +4,7 @@ import UserItem from './UserItem/UserItem';
 
 const MyItems = () => {
     const [products, setProducts] = useProducts();
+    
     return (
         <div>
             {

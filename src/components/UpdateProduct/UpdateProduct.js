@@ -6,14 +6,6 @@ const UpdateProduct = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
 
-    const productQuantity = product.quantity;
-    const deliver = () =>{
-        const newValue = (parseInt(productQuantity) - 1);
-        console.log(newValue);
-        return newValue;
-    }
-
-
     useEffect(() => {
         const url = `http://localhost:5000/product/${id}`;
         fetch(url)
@@ -35,7 +27,7 @@ const UpdateProduct = () => {
                     <div className='d-flex mt-3 justify-content-around'>
                         <input type="text" placeholder='Add Quantity'/> <Button>Add</Button>
                     </div>
-                    <Button className='d-block mx-auto mt-3' variant="warning" onClick={deliver}>Delivered</Button>
+                    <Button className='d-block mx-auto mt-3' variant="warning">Delivered</Button>
                 </Card.Body>
             </Card>
         </div>
