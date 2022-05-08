@@ -7,20 +7,20 @@ import React from 'react';
 
 const UserItem = ({ product }) => {
     const { name, img, price, description, supplier, quantity, email } = product;
-    
+
     const [user] = useAuthState(auth);
     const userEmail = user?.email;
 
-    const handleDeleteButton = id =>{
+    const handleDeleteButton = id => {
         window.location.reload(false);
         const confirm = window.confirm('Are you sure to delete this item?');
-        if(confirm){
+        if (confirm) {
             const url = `http://localhost:5000/product/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
-            .then(res => res.json())
-            .then(data => console.log(data))
+                .then(res => res.json())
+                .then(data => console.log(data))
         }
     }
     if (userEmail === email) {
@@ -49,13 +49,14 @@ const UserItem = ({ product }) => {
                                 <td>{supplier}</td>
                                 <td>${price}</td>
                                 <td>{quantity} pieces</td>
-                                <td><Button onClick={()=> handleDeleteButton(product._id)} className='btn-danger'><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></Button></td>
+                                <td><Button onClick={() => handleDeleteButton(product._id)} className='btn-danger'><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></Button></td>
                             </tr>
                         }
                     </tbody>
                 </Table>
             </div>
         );
+
     }
 };
 
