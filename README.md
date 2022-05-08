@@ -1,6 +1,6 @@
 # Apple-Mania:
 
-I am trying to make a website about a warehouse named Apple-Mania, where I am trying to stock all apple devices. Here my app's live site link: [Apple-Mania](https://assignment-10-cc88c.web.app/).
+I am trying to make a website about a warehouse named Apple-Mania, where I am trying to stock all apple devices. Here my app's live site link: [Apple-Mania](https://assignment-11-df587.web.app/).
 
 ## About My Website:
 
